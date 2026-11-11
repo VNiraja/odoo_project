@@ -1,0 +1,6 @@
+<odoo>
+  <menuitem id="menu_giftguard_root" name="GiftGuard" sequence="60" groups="giftguard_compliance.group_giftguard_user"/>
+  <menuitem id="menu_giftguard_requests" name="Gift Requests" parent="menu_giftguard_root" action="action_giftguard_request" sequence="10"/>
+  <menuitem id="menu_giftguard_policies" name="Policies" parent="menu_giftguard_root" action="action_giftguard_policy" sequence="20"/>
+  <menuitem id="menu_giftguard_organisations" name="Recipient Organisations" parent="menu_giftguard_root" action="action_giftguard_organisation" sequence="30"/>
+</odoo>

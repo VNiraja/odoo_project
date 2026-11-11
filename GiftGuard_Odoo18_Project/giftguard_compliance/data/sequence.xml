@@ -1,0 +1,8 @@
+<odoo>
+  <record id="seq_giftguard_request" model="ir.sequence">
+    <field name="name">GiftGuard Request</field>
+    <field name="code">giftguard.request</field>
+    <field name="prefix">GG/%(year)s/</field>
+    <field name="padding">5</field>
+  </record>
+</odoo>

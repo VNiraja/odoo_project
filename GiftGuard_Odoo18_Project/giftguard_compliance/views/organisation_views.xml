@@ -1,0 +1,13 @@
+<odoo>
+  <record id="view_giftguard_organisation_list" model="ir.ui.view">
+    <field name="name">giftguard.organisation.list</field><field name="model">giftguard.organisation</field>
+    <field name="arch" type="xml"><list><field name="name"/><field name="domain"/><field name="policy_owner"/><field name="active"/></list></field>
+  </record>
+  <record id="view_giftguard_organisation_form" model="ir.ui.view">
+    <field name="name">giftguard.organisation.form</field><field name="model">giftguard.organisation</field>
+    <field name="arch" type="xml"><form><sheet><group><field name="name"/><field name="domain"/><field name="policy_owner"/><field name="policy_email"/><field name="active"/></group><notebook><page string="Policies"><field name="policy_ids"><list><field name="name"/><field name="state"/><field name="effective_date"/><field name="review_date"/></list></field></page></notebook></sheet><chatter/></form></field>
+  </record>
+  <record id="action_giftguard_organisation" model="ir.actions.act_window">
+    <field name="name">Recipient Organisations</field><field name="res_model">giftguard.organisation</field><field name="view_mode">list,form</field>
+  </record>
+</odoo>

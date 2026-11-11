@@ -1,0 +1,13 @@
+<odoo>
+  <record id="view_giftguard_policy_list" model="ir.ui.view">
+    <field name="name">giftguard.policy.list</field><field name="model">giftguard.policy</field>
+    <field name="arch" type="xml"><list><field name="name"/><field name="organisation_id"/><field name="state"/><field name="effective_date"/><field name="review_date"/><field name="version"/></list></field>
+  </record>
+  <record id="view_giftguard_policy_form" model="ir.ui.view">
+    <field name="name">giftguard.policy.form</field><field name="model">giftguard.policy</field>
+    <field name="arch" type="xml"><form><header><button name="action_verify" type="object" string="Mark Verified" class="btn-primary" groups="giftguard_compliance.group_giftguard_manager"/><button name="action_expire" type="object" string="Expire" groups="giftguard_compliance.group_giftguard_manager"/><field name="state" widget="statusbar"/></header><sheet><group><field name="name"/><field name="organisation_id"/><field name="source_reference"/><field name="owner_name"/><field name="effective_date"/><field name="review_date"/><field name="version"/></group><notebook><page string="Rules"><field name="rule_ids"><list editable="bottom"><field name="sequence"/><field name="active"/><field name="rule_type"/><field name="currency_id"/><field name="amount"/><field name="category"/><field name="deal_stage"/><field name="max_sends"/><field name="period_days"/><field name="description"/></list></field></page></notebook></sheet><chatter/></form></field>
+  </record>
+  <record id="action_giftguard_policy" model="ir.actions.act_window">
+    <field name="name">Policies</field><field name="res_model">giftguard.policy</field><field name="view_mode">list,form</field>
+  </record>
+</odoo>

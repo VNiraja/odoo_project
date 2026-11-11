@@ -1,0 +1,13 @@
+<odoo>
+    <record id="group_giftguard_user" model="res.groups">
+        <field name="name">GiftGuard User</field>
+    </record>
+    <record id="group_giftguard_reviewer" model="res.groups">
+        <field name="name">GiftGuard Compliance Reviewer</field>
+        <field name="implied_ids" eval="[(4, ref('group_giftguard_user'))]"/>
+    </record>
+    <record id="group_giftguard_manager" model="res.groups">
+        <field name="name">GiftGuard Manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_giftguard_reviewer'))]"/>
+    </record>
+</odoo>

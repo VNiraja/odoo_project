@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_organisation_user,organisation user,model_giftguard_organisation,giftguard_compliance.group_giftguard_user,1,0,0,0
+access_organisation_manager,organisation manager,model_giftguard_organisation,giftguard_compliance.group_giftguard_manager,1,1,1,1
+access_policy_user,policy user,model_giftguard_policy,giftguard_compliance.group_giftguard_user,1,0,0,0
+access_policy_manager,policy manager,model_giftguard_policy,giftguard_compliance.group_giftguard_manager,1,1,1,1
+access_rule_user,rule user,model_giftguard_rule,giftguard_compliance.group_giftguard_user,1,0,0,0
+access_rule_manager,rule manager,model_giftguard_rule,giftguard_compliance.group_giftguard_manager,1,1,1,1
+access_request_user,request user,model_giftguard_request,giftguard_compliance.group_giftguard_user,1,1,1,0
+access_request_manager,request manager,model_giftguard_request,giftguard_compliance.group_giftguard_manager,1,1,1,1
