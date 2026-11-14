@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_giftguard_organisation_list" model="ir.ui.view">
+            <field name="name">giftguard.organisation.list</field>
+            <field name="model">giftguard.organisation</field>
+            <field name="arch" type="xml">
+                <list string="Recipient Organisations">
+                    <field name="name"/>
+                    <field name="domain"/>
+                    <field name="policy_owner"/>
+                    <field name="active"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_giftguard_organisation_form" model="ir.ui.view">
+            <field name="name">giftguard.organisation.form</field>
+            <field name="model">giftguard.organisation</field>
+            <field name="arch" type="xml">
+                <form string="Recipient Organisation">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="domain"/>
+                            <field name="policy_owner"/>
+                            <field name="policy_email"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"
+                                   readonly="id"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Policies" name="policies">
+                                <field name="policy_ids" readonly="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="state"/>
+                                        <field name="effective_date"/>
+                                        <field name="review_date"/>
+                                        <field name="version"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_giftguard_organisation" model="ir.actions.act_window">
+            <field name="name">Recipient Organisations</field>
+            <field name="res_model">giftguard.organisation</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,72 @@
+name: giftguard-odoo18
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-odoo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      USER: ${POSTGRES_USER:-odoo}
+      PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${ODOO_PORT:-8069}:8069"
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./addons/custom:/mnt/extra-addons/custom
+      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
+    command:
+      - odoo
+      - --admin-passwd
+      - ${ODOO_MASTER_PASSWORD:?Set ODOO_MASTER_PASSWORD in .env}
+    restart: unless-stopped
+
+  odoo-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    profiles: ["test"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      USER: ${POSTGRES_USER:-odoo}
+      PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - ./addons/custom:/mnt/extra-addons/custom
+      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
+    command:
+      - odoo
+      - -d
+      - giftguard_test
+      - -i
+      - giftguard_compliance
+      - --test-enable
+      - --stop-after-init
+      - --without-demo=all
+      - --admin-passwd
+      - ${ODOO_MASTER_PASSWORD:?Set ODOO_MASTER_PASSWORD in .env}
+    restart: "no"
+
+volumes:
+  postgres-data:
+  odoo-data:

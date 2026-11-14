@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_category_giftguard" model="ir.module.category">
+            <field name="name">GiftGuard</field>
+            <field name="description">Gifting policy and compliance decisions</field>
+            <field name="sequence">35</field>
+        </record>
+
+        <record id="group_giftguard_user" model="res.groups">
+            <field name="name">GiftGuard User</field>
+            <field name="category_id" ref="module_category_giftguard"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="group_giftguard_reviewer" model="res.groups">
+            <field name="name">GiftGuard Compliance Reviewer</field>
+            <field name="category_id" ref="module_category_giftguard"/>
+            <field name="implied_ids" eval="[(4, ref('group_giftguard_user'))]"/>
+        </record>
+        <record id="group_giftguard_manager" model="res.groups">
+            <field name="name">GiftGuard Manager</field>
+            <field name="category_id" ref="module_category_giftguard"/>
+            <field name="implied_ids" eval="[(4, ref('group_giftguard_reviewer'))]"/>
+            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="rule_giftguard_organisation_company" model="ir.rule">
+            <field name="name">GiftGuard Organisation: allowed companies</field>
+            <field name="model_id" ref="model_giftguard_organisation"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="rule_giftguard_policy_company" model="ir.rule">
+            <field name="name">GiftGuard Policy: allowed companies</field>
+            <field name="model_id" ref="model_giftguard_policy"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="rule_giftguard_rule_company" model="ir.rule">
+            <field name="name">GiftGuard Rule: allowed companies</field>
+            <field name="model_id" ref="model_giftguard_rule"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="rule_giftguard_request_company" model="ir.rule">
+            <field name="name">GiftGuard Request: allowed companies</field>
+            <field name="model_id" ref="model_giftguard_request"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>
